@@ -1,0 +1,31 @@
+1D  COLUMN[age (bin)]   ROW[Count of Adult.csv]
+
+
+
+
+2D  COLUMN[age]   ROW[Hours per week]
+
+
+
+
+3D  COLUMN[age]   ROW[Hours per week]   COLOUR[salary]
+
+
+
+
+TEMPORAL   COLUMN[age (bin)]     ROW[Count of Adult.csv]      marks[line]
+
+
+
+
+MULTI     COLUMN[age]   ROW[Hours per week]      COLOUR[salary]       SIZE[capital gain]
+
+
+
+
+TREE   SIZE[Count of Adult.csv]       COLOUR[age (bin)]         LABEL[race]         LABEL[capital gain]
+
+
+
+
+NETWORK     COLUMN[occupation]      ROW[workclass]           COLOUR[Count of Adult.csv]

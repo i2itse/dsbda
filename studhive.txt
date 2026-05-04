@@ -1,0 +1,108 @@
+#FOR CSV FILE DATA [nano file1_name.csv] then enter the below
+101,Rahul,CS
+102,Sneha,IT
+103,Amit,ECE
+
+#FOR CSV FILE DATA [nano file2_name.csv] then enter the below
+101,Maths,85
+102,Science,78
+103,English,90
+
+1)
+ 
+CREATE DATABASE student_db;
+
+2) 
+
+USE student_db;
+
+3) 
+
+
+CREATE TABLE student1 (
+    stu_id INT,
+    stu_name STRING,
+    stu_branch STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+
+4) 
+
+
+CREATE TABLE student2 (
+    stu_id INT,
+    subject STRING,
+    marks INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+5)
+
+
+
+ALTER TABLE student1 ADD COLUMNS (age INT);
+
+6)
+
+
+
+LOAD DATA LOCAL INPATH '/home/cloudera/file1_name.csv'
+INTO TABLE student1;
+
+7)
+
+LOAD DATA LOCAL INPATH '/home/cloudera/file2_name.csv'
+INTO TABLE student2;
+
+View Data
+SELECT * FROM student1;
+SELECT * FROM student2;
+
+
+
+
+
+
+C. Join Tables (student1 and student2)
+SELECT s1.stu_id, s1.stu_name, s1.stu_branch, s2.subject, s2.marks
+FROM student1 s1
+JOIN student2 s2
+ON s1.stu_id = s2.stu_id;
+
+
+
+
+D. Students having marks greater than 80
+SELECT s1.stu_id, s1.stu_name, s2.marks
+FROM student1 s1
+JOIN student2 s2
+ON s1.stu_id = s2.stu_id
+WHERE s2.marks > 80;
+
+
+
+
+8)Creating an External Hive Table
+nano student_ext.csv
+101,Rahul,CS
+102,Sneha,IT
+103,Amit,ECE
+
+hdfs dfs -mkdir /user/cloudera/student_ext
+hdfs dfs -put student_ext.csv /user/cloudera/student_ext/
+
+CREATE EXTERNAL TABLE student_ext (
+    stu_id INT,
+    stu_name STRING,
+    stu_branch STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LOCATION '/user/cloudera/student_ext/';
+
+SELECT * FROM student_ext;
+

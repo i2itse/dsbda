@@ -1,0 +1,119 @@
+#FOR 1 CSV FILE DATA [nano emp1.csv] then enter the below
+101,Rahul,Manager,HR
+102,Sneha,Analyst,IT
+103,Amit,Clerk,Finance
+after entering press ctrl x and then press y then enter 
+
+#FOR 2 CSV FILE DATA [nano emp2.csv] then enter the below
+101,50000,2
+102,60000,1
+103,45000,3
+after entering press ctrl x and then press y then enter 
+
+
+
+
+
+1)
+
+CREATE TABLE employee (
+    EmpID INT,
+    EmpName STRING,
+    EmpDesignation STRING,
+    Dept STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+CREATE TABLE emp_details (
+    EmpID INT,
+    Salary INT,
+    Leaves_Taken INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+
+2)
+
+LOAD DATA LOCAL INPATH '/home/cloudera/emp1.csv'
+INTO TABLE employee;
+
+LOAD DATA LOCAL INPATH '/home/cloudera/emp2.csv'
+INTO TABLE emp_details;
+
+
+
+
+3)
+
+INSERT INTO employee VALUES
+(104, 'Priya', 'HR', 'HR');
+
+
+ALTER TABLE employee ADD COLUMNS (
+    Age INT
+);
+
+
+INSERT INTO employee VALUES
+(105, 'Karan', 'Developer', 'IT', 29);
+
+
+
+
+4)
+
+SELECT 
+    e.EmpID,
+    e.EmpName,
+    e.EmpDesignation,
+    e.Dept,
+    d.Salary,
+    d.Leaves_Taken
+FROM employee e
+JOIN emp_details d
+ON e.EmpID = d.EmpID;
+
+
+5) ext
+
+nano emp_m.csv
+
+201,Arjun,Engineer,IT
+202,Neha,Consultant,HR
+203,Rohit,Accountant,Finance
+
+
+
+hdfs dfs -mkdir /user/cloudera/emp_m
+hdfs dfs -put /home/cloudera/emp_m.csv /user/cloudera/emp_m/
+
+
+CREATE EXTERNAL TABLE emp_main (
+    EmpID INT,
+    EmpName STRING,
+    EmpDesignation STRING,
+    Dept STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LOCATION '/user/cloudera/emp_data_main/';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+

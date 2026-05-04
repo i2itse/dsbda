@@ -1,0 +1,108 @@
+#FOR CSV FILE DATA [nano file_name.csv] then enter the below
+101,Rahul,F
+102,Sneha,Diabetes
+103,Amit,BP
+after entering press ctrl x and then press y
+
+
+
+1)
+
+CREATE TABLE patient (
+    patient_id INT,
+    name STRING,
+    disease STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+
+
+2)
+
+LOAD DATA LOCAL INPATH  '/user/cloudera/file_name.csv'
+INTO TABLE patient;
+
+
+
+
+
+3)
+
+INSERT INTO patient VALUES
+(104, 'Priya', 'Cold');
+
+
+ALTER TABLE patient ADD COLUMNS (
+    age INT
+);
+
+
+INSERT INTO patient VALUES
+(105, 'Karan', 'Allergy', 29);
+
+
+
+
+4)
+
+CREATE TABLE doctor (
+    doctor_id INT,
+    doctor_name STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+INSERT INTO doctor VALUES
+(1, 'Dr. Sharma'),
+(2, 'Dr. Mehta');
+
+
+
+
+
+CREATE TABLE patient_doctor (
+    patient_id INT,
+    doctor_id INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+
+INSERT INTO patient_doctor VALUES
+(101, 1),
+(102, 2),
+(104, 1);
+
+
+
+
+
+SELECT 
+    p.name,
+    p.disease,
+    d.doctor_name
+FROM patient p
+JOIN patient_doctor pd
+ON p.patient_id = pd.patient_id
+JOIN doctor d
+ON pd.doctor_id = d.doctor_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

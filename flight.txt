@@ -1,0 +1,48 @@
+#FOR 1 CSV FILE DATA [nano flight.csv] then enter the below
+1,2008-01-01,10
+2,2008-01-01,20
+3,2008-01-02,15
+4,2008-01-02,25
+after entering press ctrl x and then press y then enter 
+
+
+
+
+
+1)
+
+CREATE TABLE flight (
+    FlightID INT,
+    FlightDate STRING,
+    DepDelay INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+
+2)
+
+LOAD DATA LOCAL INPATH '/home/cloudera/flight.csv'
+INTO TABLE flight;
+
+
+
+3)
+CREATE INDEX flight_index
+ON TABLE flight (FlightDate)
+AS 'COMPACT'
+WITH DEFERRED REBUILD;
+
+ALTER INDEX flight_index ON flight REBUILD;
+
+
+4)
+SELECT 
+    FlightDate,
+    AVG(DepDelay) AS Avg_Departure_Delay
+FROM flight
+WHERE FlightDate LIKE '2008%'
+GROUP BY FlightDate;
+
+	
+

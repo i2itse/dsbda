@@ -1,0 +1,30 @@
+1D  COLUMN[sepal length(bin)]   ROW[Count of iris.csv]
+
+
+
+2D  COLUMN[sepal length]   ROW[sepal width]       SHOW ME[scatter plot]
+
+
+
+
+3D  COLUMN[sepal length]   ROW[sepal width]   COLOUR[species]
+
+
+
+
+TEMPORAL   COLUMN[sepal length(bin)]     ROW[Count of Adult.csv]      marks[line]
+
+
+
+
+MULTI     COLUMN[age]   ROW[Hours per week]      COLOUR[species]       SIZE[petal width]
+
+
+
+
+TREE   SIZE[Count of iris.csv]       COLOUR[species]         LABEL[species]         LABEL[Count of iris.csv]
+
+
+
+
+NETWORK     COLUMN[species]      ROW[sepal length(bin)]           COLOUR[Count of iris.csv]
